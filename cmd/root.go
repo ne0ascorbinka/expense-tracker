@@ -42,6 +42,14 @@ func NewRootCmd() *cobra.Command {
 
 	defaultPath, _ := store.DefaultPath()
 	cmd.PersistentFlags().StringVar(&filePath, "file", defaultPath, "Override data file path")
+
+	cmd.AddCommand(
+		NewAddCmd(),
+		NewUpdateCmd(),
+		NewDeleteCmd(),
+		NewListCmd(),
+	)
+
 	return cmd
 }
 
