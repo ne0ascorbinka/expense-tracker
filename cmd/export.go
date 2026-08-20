@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -9,22 +11,18 @@ import (
 	"expense-tracker/internal/format"
 )
 
-// NewListCmd creates and returns the list subcommand.
-func NewListCmd() *cobra.Command {
+// NewExportCmd creates and returns the export subcommand.
+func NewExportCmd() *cobra.Command {
 	var (
-		category string
-		month    int
-		year     int
+		outputFile string
+		month      int
+		year       int
 	)
 
 	cmd := &cobra.Command{
-		Use:   "list",
-		Short: "Display all expenses in a formatted table",
+		Use:   "export",
+		Short: "Export expenses to a CSV file",
 		RunE: func(c *cobra.Command, args []string) error {
-			if c.Flags().Changed("category") && category == "" {
-				return expense.ErrEmptyCategory
-			}
-
 			if c.Flags().Changed("month") {
 				if err := expense.ValidateMonth(month); err != nil {
 					return err
@@ -42,18 +40,30 @@ func NewListCmd() *cobra.Command {
 			}
 
 			filtered := expense.Filter(AppStore.Data.Expenses, expense.FilterOption{
-				Category: category,
-				Month:    month,
-				Year:     year,
+				Month: month,
+				Year:  year,
 			})
 
-			return format.FormatTable(c.OutOrStdout(), filtered)
+			f, err := os.Create(outputFile)
+			if err != nil {
+				return fmt.Errorf("failed to write file: %w", err)
+			}
+			defer f.Close()
+
+			if err := format.FormatCSV(f, filtered); err != nil {
+				return fmt.Errorf("failed to write file: %w", err)
+			}
+
+			fmt.Fprintf(c.OutOrStdout(), "Expenses exported to %s successfully\n", outputFile)
+			return nil
 		},
 	}
 
-	cmd.Flags().StringVar(&category, "category", "", "Filter to expenses whose category matches (case-insensitive)")
+	cmd.Flags().StringVar(&outputFile, "output", "", "Destination file path (created/overwritten)")
 	cmd.Flags().IntVar(&month, "month", 0, "Filter to a specific month (1–12)")
 	cmd.Flags().IntVar(&year, "year", 0, "Filter to a specific year")
+
+	_ = cmd.MarkFlagRequired("output")
 
 	return cmd
 }

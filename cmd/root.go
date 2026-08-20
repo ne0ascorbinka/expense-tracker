@@ -48,6 +48,9 @@ func NewRootCmd() *cobra.Command {
 		NewUpdateCmd(),
 		NewDeleteCmd(),
 		NewListCmd(),
+		NewSummaryCmd(),
+		NewExportCmd(),
+		NewBudgetCmd(),
 	)
 
 	return cmd

@@ -39,22 +39,13 @@ func NewAddCmd() *cobra.Command {
 
 			fmt.Fprintf(c.OutOrStdout(), "Expense added successfully (ID: %d)\n", newExp.ID)
 
-			// Budget warning logic (§5)
 			t, err := time.Parse(expense.DateFormat, newExp.Date)
 			if err == nil {
-				monthKey := newExp.Date[:7]
-				if budget, exists := AppStore.Data.Budgets[monthKey]; exists && budget > 0 {
-					monthExpenses := expense.Filter(AppStore.Data.Expenses, expense.FilterOption{
-						Month: int(t.Month()),
-						Year:  t.Year(),
-					})
-					total := expense.Total(monthExpenses)
-					if total > budget {
-						fmt.Fprintf(c.OutOrStdout(), "Warning: you have exceeded your budget of %s for %s.\n",
-							format.CentsToDisplay(budget),
-							t.Format("January 2006"),
-						)
-					}
+				if budget, exceeded := expense.CheckBudgetExceeded(AppStore.Data.Expenses, AppStore.Data.Budgets, t.Year(), int(t.Month())); exceeded {
+					fmt.Fprintf(c.OutOrStdout(), "Warning: you have exceeded your budget of %s for %s.\n",
+						format.CentsToDisplay(budget),
+						t.Format("January 2006"),
+					)
 				}
 			}
 

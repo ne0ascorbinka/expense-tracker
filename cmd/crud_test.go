@@ -345,4 +345,9 @@ func TestListCommand(t *testing.T) {
 	if err == nil || !strings.Contains(err.Error(), expense.ErrInvalidYear.Error()) {
 		t.Fatalf("expected invalid year error, got: %v", err)
 	}
+
+	_, err = executeCmd(filePath, "list", "--category", "")
+	if err == nil || !strings.Contains(err.Error(), expense.ErrEmptyCategory.Error()) {
+		t.Fatalf("expected ErrEmptyCategory, got: %v", err)
+	}
 }

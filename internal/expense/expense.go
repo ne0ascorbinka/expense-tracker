@@ -27,6 +27,7 @@ const (
 var (
 	ErrEmptyDescription       = errors.New("description must not be empty")
 	ErrDescriptionTooLong     = errors.New("description must not exceed 255 characters")
+	ErrEmptyCategory          = errors.New("category must not be empty")
 	ErrAmountMustBePositive   = errors.New("amount must be greater than zero")
 	ErrInvalidDateFormat      = errors.New("date must be in YYYY-MM-DD format")
 	ErrInvalidMonth           = errors.New("month must be between 1 and 12")
