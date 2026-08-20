@@ -13,13 +13,12 @@ import (
 )
 
 var (
-	ErrAmountMustBePositive = errors.New("amount must be greater than zero")
 	ErrAmountTooManyDecimals = errors.New("amount must have at most 2 decimal places")
 	ErrInvalidAmountNumber  = errors.New("amount must be a valid number")
 )
 
-// ParseAmount parses an amount string (e.g. "20", "20.5", "20.50") into integer cents.
-// Enforces ≤ 2 decimal places and positive value.
+// ParseAmount parses an amount string (e.g. "20", "20.5", "20.50", "-10") into integer cents.
+// Enforces <= 2 decimal places and valid number formatting.
 func ParseAmount(s string) (int64, error) {
 	s = strings.TrimSpace(s)
 	if s == "" {
@@ -73,10 +72,6 @@ func ParseAmount(s string) (int64, error) {
 	totalCents := intVal*100 + decVal
 	if isNegative {
 		totalCents = -totalCents
-	}
-
-	if totalCents <= 0 {
-		return 0, ErrAmountMustBePositive
 	}
 
 	return totalCents, nil
