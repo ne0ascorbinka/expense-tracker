@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"expense-tracker/internal/expense"
-	"expense-tracker/internal/format"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/format"
 )
 
 // NewSummaryCmd creates and returns the summary subcommand.

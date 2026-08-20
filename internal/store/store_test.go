@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"expense-tracker/internal/expense"
-	"expense-tracker/internal/store"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/store"
 )
 
 func TestStoreFirstRun(t *testing.T) {

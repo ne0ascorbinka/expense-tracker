@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"expense-tracker/cmd"
+	"github.com/ne0ascorbinka/expense-tracker/cmd"
 )
 
 func main() {

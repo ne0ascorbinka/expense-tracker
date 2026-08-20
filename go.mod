@@ -1,4 +1,4 @@
-module expense-tracker
+module github.com/ne0ascorbinka/expense-tracker
 
 go 1.25.6
 

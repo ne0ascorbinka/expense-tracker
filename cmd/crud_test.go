@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"expense-tracker/cmd"
-	"expense-tracker/internal/expense"
-	"expense-tracker/internal/store"
+	"github.com/ne0ascorbinka/expense-tracker/cmd"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/store"
 )
 
 func executeCmd(file string, args ...string) (string, error) {

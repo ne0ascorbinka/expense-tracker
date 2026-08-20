@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
 )
 
 // Data represents the JSON schema stored on disk.

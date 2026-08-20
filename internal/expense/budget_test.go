@@ -3,7 +3,7 @@ package expense_test
 import (
 	"testing"
 
-	"expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
 )
 
 func TestMonthKey(t *testing.T) {

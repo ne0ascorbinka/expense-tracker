@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"expense-tracker/cmd"
+	"github.com/ne0ascorbinka/expense-tracker/cmd"
 )
 
 func TestRootCmdHelp(t *testing.T) {

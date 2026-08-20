@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"expense-tracker/internal/expense"
+	"github.com/ne0ascorbinka/expense-tracker/internal/expense"
 )
 
 func TestValidateDescription(t *testing.T) {

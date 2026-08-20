@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"expense-tracker/internal/store"
+	"github.com/ne0ascorbinka/expense-tracker/internal/store"
 )
 
 var (
